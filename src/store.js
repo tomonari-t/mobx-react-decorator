@@ -1,4 +1,4 @@
-import { observable, autorun, computed } from 'mobx';
+import { observable, autorun, computed, action } from 'mobx';
 
 class ObservableTodoStore {
 
@@ -22,7 +22,7 @@ class ObservableTodoStore {
     return this.todos.filter(todo => todo.completed === true).length;
   }
 
-  addTodo = (task) => {
+  @action addTodo = (task) => {
     this.todos.push({
       completed: false,
       task: task,

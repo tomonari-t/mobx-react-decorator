@@ -1,4 +1,4 @@
-# create-react-app with Mobx example
+# create-react-app with MobX example
 
 ## To use @decoraotr
 

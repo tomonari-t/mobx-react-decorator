@@ -6,11 +6,11 @@ import ObservableTodoStore from './store';
 import { Provider } from 'mobx-react';
 
 const stores = {
-  todoStore: new ObservableTodoStore()
+  todoStore: new ObservableTodoStore(),
 };
 
 ReactDOM.render(
-  <Provider {...stores}>
+  <Provider {...stores}> 
     <TodoListComponent/>
   </Provider>
   , document.getElementById('root'));
