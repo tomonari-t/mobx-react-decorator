@@ -1,15 +1,14 @@
-import { observable, action } from 'mobx';
-export default class TodoStore {
+import { observable, autorun, computed } from 'mobx';
+
+class ObservableTodoStore {
 
   @observable todos = [];
+  @observable pendingRequest = 0;
   constructor() {
+    autorun(() => console.log(this.report));
   }
 
-  get completedTodoCount() {
-    return this.todos.filter(todo => todo.completed === true).length;
-  }
-
-  report() {
+  @computed get report() {
     if (this.todos.length === 0) {
       return '<none>';
     } else {
@@ -19,7 +18,11 @@ export default class TodoStore {
     }
   }
 
-  addTodo(task) {
+  @computed get completedTodoCount() {
+    return this.todos.filter(todo => todo.completed === true).length;
+  }
+
+  addTodo = (task) => {
     this.todos.push({
       completed: false,
       task: task,
@@ -28,19 +31,4 @@ export default class TodoStore {
   }
 }
 
-const todoStore = new TodoStore();
-
-todoStore.addTodo("read MobX tutorial");
-console.log(todoStore.report());
-
-todoStore.addTodo("try MobX");
-console.log(todoStore.report());
-
-todoStore.todos[0].completed = true;
-console.log(todoStore.report());
-
-todoStore.todos[1].task = "try MobX in own project";
-console.log(todoStore.report());
-
-todoStore.todos[0].task = "grok MobX tutorial";
-console.log(todoStore.report());
+export default ObservableTodoStore
